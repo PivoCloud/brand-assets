@@ -1,0 +1,263 @@
+/* PivoCloud — Foundations v2 (logo-driven)
+   ----------------------------------------------------------------------------
+   The logo is the source of truth: chunky rounded ribbons folded into a "P"
+   on a 45° pivot, rendered in a cyan→royal-blue gradient. The system mirrors
+   that: rounded forms, a brand gradient used as a real motif (not just on the
+   mark), warmer near-black with a blue undertone, and a geometric humanist
+   sans whose rounded apertures echo the wordmark.
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* ---------- Brand blue — anchored to logo gradient stops ---------- */
+  --pc-cyan:        #22d3ee;   /* logo top-light */
+  --pc-blue-bright: #3b82f6;   /* logo midtone */
+  --pc-blue:        #2563eb;   /* primary CTA */
+  --pc-blue-deep:   #1e40af;   /* logo shadow side */
+  --pc-blue-ink:    #0c1f5c;   /* deepest accent */
+
+  --pc-blue-50:  #ecf4ff;
+  --pc-blue-100: #d6e7ff;
+  --pc-blue-200: #a8cfff;
+  --pc-blue-300: #6db4ff;
+  --pc-blue-400: #3b82f6;
+  --pc-blue-500: #2563eb;
+  --pc-blue-600: #1d4ed8;
+  --pc-blue-700: #1e40af;
+  --pc-blue-800: #1e3a8a;
+
+  /* ---------- The brand gradient — a first-class motif ---------- */
+  --pc-grad-from: #22d3ee;
+  --pc-grad-mid:  #3b82f6;
+  --pc-grad-to:   #1e40af;
+  --pc-brand-gradient:    linear-gradient(135deg, var(--pc-grad-from) 0%, var(--pc-grad-mid) 50%, var(--pc-grad-to) 100%);
+  --pc-brand-gradient-h:  linear-gradient(90deg,  var(--pc-grad-from) 0%, var(--pc-grad-mid) 55%, var(--pc-grad-to) 100%);
+  --pc-brand-gradient-v:  linear-gradient(180deg, var(--pc-grad-from) 0%, var(--pc-grad-to) 100%);
+  /* Tinted-glow halo behind hero / featured surfaces */
+  --pc-brand-halo: radial-gradient(60% 80% at 50% 0%, rgba(59,130,246,0.28) 0%, rgba(34,211,238,0.10) 35%, transparent 70%);
+
+  /* ---------- Surface scale — warm-dark with a blue undertone ---------- */
+  /* Tuned so the brand gradient feels native, not pasted on. The marketing
+     surface is the deepest; the app surface sits one notch up; cards and
+     elevated surfaces climb in 8% L* steps. */
+  --pc-surface-0: #070b14;   /* marketing deep */
+  --pc-surface-1: #0b1220;   /* app page bg */
+  --pc-surface-2: #111a2e;   /* cards, side-nav */
+  --pc-surface-3: #18233d;   /* elevated card / table header */
+  --pc-surface-4: #1e2c4a;   /* nested input / hover */
+  --pc-surface-5: #283a5e;   /* divider strong */
+
+  --pc-line:        rgba(148, 163, 184, 0.12);  /* default hairline */
+  --pc-line-strong: rgba(148, 163, 184, 0.20);
+  --pc-line-brand:  rgba(59, 130, 246, 0.35);   /* blue-tinted divider */
+
+  /* ---------- Foreground ---------- */
+  --pc-fg-1: #ffffff;
+  --pc-fg-2: #e8edf6;
+  --pc-fg-3: #a3aec5;
+  --pc-fg-4: #6b7894;
+  --pc-fg-on-blue: #ffffff;
+  --pc-fg-on-cyan: #061025;
+
+  /* ---------- Semantic ---------- */
+  --pc-success:    #34d399;
+  --pc-success-bg: rgba(52, 211, 153, 0.12);
+  --pc-success-fg: #6ee7b7;
+  --pc-warn:       #fbbf24;
+  --pc-warn-bg:    rgba(251, 191, 36, 0.14);
+  --pc-warn-fg:    #fcd34d;
+  --pc-danger:     #f87171;
+  --pc-danger-bg:  rgba(248, 113, 113, 0.14);
+  --pc-danger-fg:  #fca5a5;
+
+  /* macOS traffic-light dots */
+  --pc-mac-red:    #ff5f57;
+  --pc-mac-yellow: #febc2e;
+  --pc-mac-green:  #28c840;
+
+  /* Code-panel syntax */
+  --pc-code-bg:      #0a1226;
+  --pc-code-fg:      #e8edf6;
+  --pc-code-comment: #6b7894;
+  --pc-code-keyword: #c084fc;
+  --pc-code-string:  #fcd34d;
+  --pc-code-fn:      #60a5fa;
+  --pc-code-prompt:  #34d399;
+  --pc-code-number:  #f0abfc;
+
+  /* ---------- Type families ---------- */
+  /* Manrope — geometric humanist sans with the same rounded apertures as the
+     wordmark's lowercase. Substitute until the actual brand font ships. */
+  --pc-font-sans: 'Manrope', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --pc-font-mono: 'JetBrains Mono', ui-monospace, 'Fira Code', Menlo, Consolas, monospace;
+  --pc-font-display: var(--pc-font-sans);
+
+  /* ---------- Type scale ---------- */
+  --pc-text-xs:   12px;
+  --pc-text-sm:   13px;
+  --pc-text-base: 15px;
+  --pc-text-md:   16px;
+  --pc-text-lg:   18px;
+  --pc-text-xl:   22px;
+  --pc-text-2xl:  28px;
+  --pc-text-3xl:  36px;
+  --pc-text-4xl:  48px;
+  --pc-text-5xl:  64px;
+  --pc-text-6xl:  84px;
+
+  --pc-leading-tight: 1.04;
+  --pc-leading-snug:  1.18;
+  --pc-leading-base:  1.5;
+  --pc-leading-loose: 1.65;
+
+  --pc-tracking-tight: -0.03em;
+  --pc-tracking-snug:  -0.018em;
+  --pc-tracking-base:  0;
+  --pc-tracking-wide:  0.06em;
+
+  --pc-weight-regular:  400;
+  --pc-weight-medium:   500;
+  --pc-weight-semibold: 600;
+  --pc-weight-bold:     700;
+  --pc-weight-black:    800;
+
+  /* ---------- Spacing (4px base) ---------- */
+  --pc-space-1:  4px;
+  --pc-space-2:  8px;
+  --pc-space-3:  12px;
+  --pc-space-4:  16px;
+  --pc-space-5:  20px;
+  --pc-space-6:  24px;
+  --pc-space-8:  32px;
+  --pc-space-10: 40px;
+  --pc-space-12: 48px;
+  --pc-space-16: 64px;
+  --pc-space-20: 80px;
+  --pc-space-24: 96px;
+
+  /* ---------- Radius — bumped up to match the chunky rounded logo ---------- */
+  --pc-radius-xs:   6px;
+  --pc-radius-sm:   8px;
+  --pc-radius-md:   10px;   /* buttons, inputs */
+  --pc-radius-lg:   14px;   /* small cards */
+  --pc-radius-xl:   18px;   /* default cards */
+  --pc-radius-2xl:  24px;   /* feature panels */
+  --pc-radius-3xl:  32px;
+  --pc-radius-pill: 999px;
+
+  /* ---------- Shadow / glow ---------- */
+  --pc-shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
+  --pc-shadow-md: 0 6px 18px rgba(4,8,20,0.45), 0 1px 2px rgba(0,0,0,0.35);
+  --pc-shadow-lg: 0 18px 48px rgba(4,8,20,0.55), 0 2px 6px rgba(0,0,0,0.4);
+  --pc-shadow-xl: 0 32px 80px rgba(4,8,20,0.65);
+  --pc-shadow-inset-hi: inset 0 1px 0 rgba(255,255,255,0.08);
+
+  /* Brand halos */
+  --pc-glow-cta:   0 8px 24px rgba(37,99,235,0.45), 0 2px 8px rgba(34,211,238,0.25);
+  --pc-glow-soft:  0 0 32px rgba(59,130,246,0.25);
+  --pc-ring-focus: 0 0 0 3px rgba(59,130,246,0.45);
+}
+
+/* ---------- Base type roles ---------- */
+.pc-display {
+  font-family: var(--pc-font-display);
+  font-weight: var(--pc-weight-black);
+  font-size: var(--pc-text-6xl);
+  line-height: var(--pc-leading-tight);
+  letter-spacing: var(--pc-tracking-tight);
+  color: var(--pc-fg-1);
+}
+.pc-h1 {
+  font-family: var(--pc-font-sans);
+  font-weight: var(--pc-weight-black);
+  font-size: var(--pc-text-5xl);
+  line-height: var(--pc-leading-tight);
+  letter-spacing: var(--pc-tracking-tight);
+  color: var(--pc-fg-1);
+}
+.pc-h2 {
+  font-family: var(--pc-font-sans);
+  font-weight: var(--pc-weight-bold);
+  font-size: var(--pc-text-4xl);
+  line-height: var(--pc-leading-snug);
+  letter-spacing: var(--pc-tracking-snug);
+  color: var(--pc-fg-1);
+}
+.pc-h3 {
+  font-family: var(--pc-font-sans);
+  font-weight: var(--pc-weight-bold);
+  font-size: var(--pc-text-2xl);
+  line-height: var(--pc-leading-snug);
+  letter-spacing: var(--pc-tracking-snug);
+  color: var(--pc-fg-1);
+}
+.pc-h4 {
+  font-family: var(--pc-font-sans);
+  font-weight: var(--pc-weight-semibold);
+  font-size: var(--pc-text-xl);
+  line-height: var(--pc-leading-snug);
+  color: var(--pc-fg-1);
+}
+.pc-body {
+  font-family: var(--pc-font-sans);
+  font-size: var(--pc-text-md);
+  line-height: var(--pc-leading-loose);
+  color: var(--pc-fg-3);
+}
+.pc-body-strong { color: var(--pc-fg-2); }
+.pc-small {
+  font-family: var(--pc-font-sans);
+  font-size: var(--pc-text-sm);
+  line-height: var(--pc-leading-base);
+  color: var(--pc-fg-3);
+}
+.pc-eyebrow {
+  font-family: var(--pc-font-sans);
+  font-size: var(--pc-text-xs);
+  font-weight: var(--pc-weight-semibold);
+  letter-spacing: var(--pc-tracking-wide);
+  text-transform: uppercase;
+  color: var(--pc-fg-3);
+}
+.pc-mono, .pc-code {
+  font-family: var(--pc-font-mono);
+  font-size: 0.92em;
+  color: var(--pc-fg-2);
+  font-feature-settings: "ss01", "cv01", "zero";
+}
+
+/* Brand-blue accent run + gradient text */
+.pc-accent-blue { color: var(--pc-blue-300); }
+.pc-accent-cyan { color: var(--pc-cyan); }
+.pc-accent-gradient {
+  background: var(--pc-brand-gradient-h);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------- Brand ribbon (the signature motif) ----------
+   A 1px gradient line used as section divider, card top accent, or progress
+   indicator. Comes from the logo's folded-ribbon construction. */
+.pc-ribbon {
+  height: 1px;
+  width: 100%;
+  background: var(--pc-brand-gradient-h);
+  border: 0;
+  opacity: 0.6;
+}
+.pc-ribbon-thick { height: 2px; opacity: 0.9; }
+.pc-ribbon-top {
+  position: relative;
+}
+.pc-ribbon-top::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 2px;
+  background: var(--pc-brand-gradient-h);
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+  opacity: 0.85;
+}
