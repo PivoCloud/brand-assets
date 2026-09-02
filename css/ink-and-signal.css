@@ -1,0 +1,117 @@
+/* ==========================================================================
+   PivoCloud — "Ink & Signal" design system (v2)
+   Confirmed 2026-08-31. Current system for landing, marketing surfaces and
+   any new external deliverable.
+
+   Supersedes colors_and_type.css (v1, "dark, calm, technical"), which is kept
+   in this repo because already-published deliverables link it live, and which
+   still governs the legacy PivoCloud console until its migration.
+
+   Numeric source of truth: frontend/src/app/globals.css in the PivoCloud
+   application repo. If this file and that one disagree, that one wins.
+
+   Fonts (load separately):
+   https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap
+   ========================================================================== */
+
+:root {
+  /* --- Light side: "paper" -------------------------------------------- */
+  --paper:        #FAFAF7;  /* page ground */
+  --paper-2:      #F3F2ED;  /* alternate section tint */
+  --ink:          #0C1A2B;  /* headings, primary text */
+  --ink-muted:    #4A5768;  /* body, secondary text */
+  --ink-faint:    #8A94A0;  /* captions, microcopy */
+  --rule:         #E3E1D9;  /* hairlines on paper */
+  --rule-2:       #D8D6CD;  /* hairlines on paper-2 */
+
+  /* --- Action + signal ------------------------------------------------- */
+  --blue:         #0057DF;  /* THE action color: buttons, links, kickers */
+  --blue-deep:    #0041B8;  /* hover / active of blue */
+  --cyan:         #00E5FA;  /* signal ONLY: live dots, status, selection.
+                               never a background, never body text */
+
+  /* --- Dark side: "vault" (console + evidence panels) ------------------- */
+  --vault:         #071120;
+  --vault-panel:   #0A1830;
+  --vault-raised:  #0F1D33;
+  --vault-rule:    #1A2A40;
+  --text-on-dark:  #E8EDF4;
+  --muted-on-dark: #97A5B8;
+  --faint-on-dark: #5B7A9E;
+  --link-on-dark:  #4D94FF;  /* buttons on dark keep --blue */
+
+  /* --- Status: console layer only, never on marketing surfaces ---------- */
+  --success:  #31D08C;
+  --warning:  #F5A623;
+  --danger:   #F0565A;
+  --neutral:  #5B7A9E;
+
+  /* --- Type ------------------------------------------------------------ */
+  --font-display: "Instrument Serif", Georgia, "Times New Roman", serif;
+  --font-sans:    "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono:    "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* --- Shape: never pills, never sharp ---------------------------------- */
+  --radius-control: 9px;
+  --radius-card:    12px;
+
+  /* --- Depth: one recipe per elevation, no ad-hoc blurs ------------------ */
+  --shadow-card: 0 1px 2px rgba(12, 26, 43, 0.04), 0 8px 24px rgba(12, 26, 43, 0.06);
+  --shadow-hero: 0 34px 90px rgba(12, 26, 43, 0.18);
+
+  /* --- Motion ----------------------------------------------------------- */
+  --ease:            cubic-bezier(0.2, 0.7, 0.2, 1);
+  --duration-hover:  150ms;
+  --duration-reveal: 600ms;
+
+  /* --- The one gradient in the whole system ----------------------------- */
+  --brand-wire: linear-gradient(90deg, var(--blue), var(--cyan));
+}
+
+/* Role classes ------------------------------------------------------------ */
+
+.pc-display  { font-family: var(--font-display); font-weight: 400; font-size: 64px; line-height: 1.05; color: var(--ink); text-wrap: balance; }
+.pc-h2       { font-family: var(--font-display); font-weight: 400; font-size: 44px; line-height: 1.1;  color: var(--ink); text-wrap: balance; }
+.pc-body     { font-family: var(--font-sans); font-size: 17px; line-height: 1.6; color: var(--ink-muted); text-wrap: pretty; }
+.pc-small    { font-family: var(--font-sans); font-size: 15px; line-height: 1.55; color: var(--ink-faint); }
+.pc-kicker   { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.04em; color: var(--blue); }
+.pc-mono     { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+/* The 3px brand wire sits at the very top of a marketing page. */
+.pc-brand-wire { height: 3px; background: var(--brand-wire); }
+
+/* Hairline rules instead of boxes. */
+.pc-rule { border: 0; border-top: 1px solid var(--rule); margin: 0; }
+
+/* Primary action. One primary CTA, repeated down the page. */
+.pc-cta {
+  display: inline-block;
+  padding: 13px 22px;
+  border-radius: var(--radius-control);
+  background: var(--blue);
+  color: #fff;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  text-decoration: none;
+  transition: background var(--duration-hover) ease-out;
+}
+.pc-cta:hover { background: var(--blue-deep); }
+.pc-cta:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+
+/* Dark evidence panel on a light page: terminals, console frames. */
+.pc-vault {
+  background: var(--vault);
+  color: var(--text-on-dark);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--vault-rule);
+}
+
+::selection { background: var(--cyan); color: var(--ink); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
