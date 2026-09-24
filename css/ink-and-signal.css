@@ -1,112 +1,196 @@
 /* ==========================================================================
-   PivoCloud — "Ink & Signal" design system (v2)
-   Confirmed 2026-08-31. Current system for landing, marketing surfaces and
-   any new external deliverable.
+   PivoCloud: "Interlock" design system (v2)
+   Confirmed 2026-09-07, live on pivocloud.com since 2026-09-09.
+   Last synced from the application repo: 2026-09-24.
 
-   Supersedes colors_and_type.css (v1, "dark, calm, technical"), which is kept
-   in this repo because already-published deliverables link it live, and which
-   still governs the legacy PivoCloud console until its migration.
+   THE FILE NAME IS HISTORICAL. v2 was first published here as "Ink & Signal"
+   (2026-08-31). Interlock replaced it on 2026-09-07 and keeps this URL, because
+   already-published material links it live. Ink & Signal is retired: no warm
+   paper ground, no serif, no Instrument / IBM Plex faces, no 3px brand wire.
+   The old variable and class names below still resolve (to Interlock values),
+   so a page built on the old file keeps rendering, now on the current look.
 
    Numeric source of truth: frontend/src/app/globals.css in the PivoCloud
-   application repo. If this file and that one disagree, that one wins.
+   application repo, where tokens are stored as RGB channels. They are published
+   here as plain colours so that var(--token) works directly. If this file and
+   that one disagree, that one wins.
 
    Fonts (load separately):
-   https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap
+   https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Sometype+Mono:wght@400..700&display=swap
+
+   Logos: logos/v2/ in this repo (mark.svg, logo.svg, logo-on-dark.svg + PNGs).
    ========================================================================== */
 
 :root {
-  /* --- Light side: "paper" -------------------------------------------- */
-  --paper:        #FAFAF7;  /* page ground */
-  --paper-2:      #F3F2ED;  /* alternate section tint */
-  --ink:          #0C1A2B;  /* headings, primary text */
-  --ink-muted:    #4A5768;  /* body, secondary text */
-  --ink-faint:    #8A94A0;  /* captions, microcopy */
-  --rule:         #E3E1D9;  /* hairlines on paper */
-  --rule-2:       #D8D6CD;  /* hairlines on paper-2 */
+  /* --- Ground and type (light, the default) ----------------------------- */
+  --ground:        #FFFFFF;  /* page ground: white, never warm paper */
+  --ground-2:      #F5F8FB;  /* alternate section band */
+  --panel:         #FFFFFF;  /* cards and panels */
+  --panel-hook:    #F5F8FB;  /* one side of an interlocked pair */
+  --panel-bracket: #F5F8FB;  /* the other side (same on light, by design) */
+  --ink:           #0B1633;  /* headings and primary text */
+  --ink-muted:     #4A5670;  /* body and secondary text */
+  --ink-faint:     #8EA0BF;  /* captions and microcopy only, never body */
+  --rule:          #C9D6F5;  /* hairlines */
+  --rule-strong:   #B9C4DA;  /* hairlines that must read as a boundary */
+  --rule-faint:    #E6EEFF;  /* lozenge chains and decorative rules */
+  --danger:        #C01C2C;  /* form validation on funnel pages */
 
-  /* --- Action + signal ------------------------------------------------- */
-  --blue:         #0057DF;  /* THE action color: buttons, links, kickers */
-  --blue-deep:    #0041B8;  /* hover / active of blue */
-  --cyan:         #00E5FA;  /* signal ONLY: live dots, status, selection.
-                               never a background, never body text */
+  /* --- Action and signal ------------------------------------------------ */
+  --action:        #0057DF;  /* THE action colour: buttons, links, icons */
+  --action-hover:  #0041B8;  /* hover / active */
+  --on-action:     #FFFFFF;  /* text on an action surface */
+  --signal:        #00E4FD;  /* live dots, status, selection. Never body text */
 
-  /* --- Dark side: "vault" (console + evidence panels) ------------------- */
-  --vault:         #071120;
-  --vault-panel:   #0A1830;
-  --vault-raised:  #0F1D33;
-  --vault-rule:    #1A2A40;
-  --text-on-dark:  #E8EDF4;
-  --muted-on-dark: #97A5B8;
-  --faint-on-dark: #5B7A9E;
-  --link-on-dark:  #4D94FF;  /* buttons on dark keep --blue */
+  /* The mark's gradient. It lives in the mark and in the joints between
+     panels (seams), nowhere else. Never as a decorative bar. */
+  --gradient-from: #00FAFE;  /* cyan end */
+  --gradient-to:   #0057DF;  /* blue end */
+  --gradient:      linear-gradient(135deg, var(--gradient-from), var(--gradient-to));
+
+  /* --- Console: a dark evidence panel on either ground ------------------- */
+  --console:       #081431;  /* terminal / evidence panel */
+  --console-rule:  #1F3059;  /* its 1px bezel */
+  --console-text:  #C9D6F5;  /* its body text */
+
+  /* --- Dark values. Not switched on yet: pivocloud.com renders light only.
+         Published so a dark deliverable uses the same numbers. On navy the
+         cyan end becomes the action colour. ------------------------------- */
+  --ground-dark:        #0B1633;
+  --ground-2-dark:      #0F1D42;
+  --panel-dark:         #172A58;
+  --panel-hook-dark:    #0F2A50;
+  --panel-bracket-dark: #14224F;
+  --ink-dark:           #C9D3E6;
+  --ink-muted-dark:     #A9B7D0;
+  --ink-faint-dark:     #8EA0BF;
+  --rule-dark:          #1E2F5A;
+  --rule-strong-dark:   #24376A;
+  --rule-faint-dark:    #1E2F5A;
+  --danger-dark:        #FF8A94;
+  --action-dark:        #00E4FD;
+  --action-hover-dark:  #00C9F5;
+  --on-action-dark:     #0B1633;
+  --console-dark:       #060D22;
+  --console-rule-dark:  #1E2F5A;
+  --console-text-dark:  #C9D3E6;
 
   /* --- Status: console layer only, never on marketing surfaces ---------- */
   --success:  #31D08C;
   --warning:  #F5A623;
-  --danger:   #F0565A;
   --neutral:  #5B7A9E;
+  --console-danger: #F0565A;
 
-  /* --- Type ------------------------------------------------------------ */
-  --font-display: "Instrument Serif", Georgia, "Times New Roman", serif;
-  --font-sans:    "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-mono:    "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  /* --- Type: one grotesk for display and body, one mono. No serif. ------- */
+  --font-display: "Bricolage Grotesque", "Trebuchet MS", "Segoe UI", Verdana, sans-serif;
+  --font-sans:    var(--font-display);
+  --font-mono:    "Sometype Mono", "Courier New", Courier, monospace;
 
-  /* --- Shape: never pills, never sharp ---------------------------------- */
-  --radius-control: 9px;
-  --radius-card:    12px;
+  /* --- Shape: 45 degree chamfers, never radii, never pills --------------- */
+  --chamfer-control: 12px;
+  --chamfer-panel:   16px;
 
-  /* --- Depth: one recipe per elevation, no ad-hoc blurs ------------------ */
-  --shadow-card: 0 1px 2px rgba(12, 26, 43, 0.04), 0 8px 24px rgba(12, 26, 43, 0.06);
-  --shadow-hero: 0 34px 90px rgba(12, 26, 43, 0.18);
+  /* --- Depth: one recipe, light ground only, never on dark -------------- */
+  --shadow-hero: 0 34px 90px rgba(11, 22, 51, 0.14);
 
-  /* --- Motion ----------------------------------------------------------- */
+  /* --- Motion (unchanged from Ink & Signal) ------------------------------ */
   --ease:            cubic-bezier(0.2, 0.7, 0.2, 1);
   --duration-hover:  150ms;
   --duration-reveal: 600ms;
 
-  /* --- The one gradient in the whole system ----------------------------- */
-  --brand-wire: linear-gradient(90deg, var(--blue), var(--cyan));
+  /* --- Retired Ink & Signal names, kept so old pages still resolve ------- */
+  --paper:         var(--ground);
+  --paper-2:       var(--ground-2);
+  --rule-2:        var(--rule-strong);
+  --blue:          var(--action);
+  --blue-deep:     var(--action-hover);
+  --cyan:          var(--signal);
+  --vault:         var(--console);
+  --vault-panel:   #0B1633;
+  --vault-raised:  #13265A;
+  --vault-rule:    var(--console-rule);
+  --text-on-dark:  var(--console-text);
+  --muted-on-dark: #8EA0BF;
+  --faint-on-dark: #6F7FA3;
+  --link-on-dark:  #00E4FD;
+  --radius-control: 0;
+  --radius-card:    0;
+  --shadow-card:   none;
+  --brand-wire:    var(--gradient);
 }
 
 /* Role classes ------------------------------------------------------------ */
 
-.pc-display  { font-family: var(--font-display); font-weight: 400; font-size: 64px; line-height: 1.05; color: var(--ink); text-wrap: balance; }
-.pc-h2       { font-family: var(--font-display); font-weight: 400; font-size: 44px; line-height: 1.1;  color: var(--ink); text-wrap: balance; }
-.pc-body     { font-family: var(--font-sans); font-size: 17px; line-height: 1.6; color: var(--ink-muted); text-wrap: pretty; }
-.pc-small    { font-family: var(--font-sans); font-size: 15px; line-height: 1.55; color: var(--ink-faint); }
-.pc-kicker   { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.04em; color: var(--blue); }
-.pc-mono     { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.pc-display { font-family: var(--font-display); font-weight: 800; font-size: 52px; line-height: 1.02; letter-spacing: -0.022em; font-variation-settings: "opsz" 96; color: var(--ink); text-wrap: balance; }
+.pc-h2      { font-family: var(--font-display); font-weight: 800; font-size: 46px; line-height: 1.02; letter-spacing: -0.022em; font-variation-settings: "opsz" 96; color: var(--ink); text-wrap: balance; }
+.pc-h3      { font-family: var(--font-display); font-weight: 700; font-size: 26px; line-height: 1.15; letter-spacing: -0.012em; font-variation-settings: "opsz" 32; color: var(--ink); text-wrap: balance; }
+.pc-body    { font-family: var(--font-sans); font-size: 17px; line-height: 1.55; font-variation-settings: "opsz" 17; color: var(--ink-muted); text-wrap: pretty; }
+.pc-small   { font-family: var(--font-sans); font-size: 15px; line-height: 1.5; font-variation-settings: "opsz" 17; color: var(--ink-faint); }
+.pc-mono    { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
 
-/* The 3px brand wire sits at the very top of a marketing page. */
-.pc-brand-wire { height: 3px; background: var(--brand-wire); }
+/* Kept for old pages. Numbered kickers ("01 · The platform") are retired:
+   a section head is a claim, not a label. */
+.pc-kicker  { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.04em; color: var(--action); }
+
+/* Retired: Interlock draws no brand wire. Kept so old markup renders nothing. */
+.pc-brand-wire { display: none; }
 
 /* Hairline rules instead of boxes. */
 .pc-rule { border: 0; border-top: 1px solid var(--rule); margin: 0; }
 
-/* Primary action. One primary CTA, repeated down the page. */
+/* Chamfers: cut top-left and bottom-right at 45 degrees, on the mark's axis.
+   clip-path also clips border, outline and box-shadow, so a hairline that
+   follows the cut is two nested layers (.pc-hairline > .pc-hairline-inner). */
+.pc-chamfer-control { clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px); }
+.pc-chamfer-panel   { clip-path: polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px); }
+.pc-hairline        { background: var(--rule); clip-path: polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px); }
+.pc-hairline-inner  { margin: 1px; background: var(--panel); clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px); }
+
+/* Primary action. One primary CTA, repeated down the page. 52px tall,
+   chamfered. A focus ring cannot be painted by the button itself (clip-path
+   removes it): wrap it in .pc-cta-wrap, which paints the ring. */
 .pc-cta {
-  display: inline-block;
-  padding: 13px 22px;
-  border-radius: var(--radius-control);
-  background: var(--blue);
-  color: #fff;
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  min-height: 52px;
+  padding: 0 26px;
+  background: var(--action);
+  color: var(--on-action);
   font-family: var(--font-sans);
+  font-size: 17px;
   font-weight: 600;
+  letter-spacing: -0.005em;
   text-decoration: none;
+  clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
   transition: background var(--duration-hover) ease-out;
 }
-.pc-cta:hover { background: var(--blue-deep); }
-.pc-cta:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+.pc-cta:hover { background: var(--action-hover); }
+.pc-cta-wrap { position: relative; display: inline-block; }
+.pc-cta-wrap::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  background: var(--action);
+  clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+  opacity: 0;
+  pointer-events: none;
+}
+.pc-cta-wrap:has(:focus-visible)::after { opacity: 1; }
 
-/* Dark evidence panel on a light page: terminals, console frames. */
+/* Dark evidence panel on a light page: terminals, console frames.
+   .pc-vault is the retired name, kept as an alias. */
+.pc-console,
 .pc-vault {
-  background: var(--vault);
-  color: var(--text-on-dark);
-  border-radius: var(--radius-card);
-  border: 1px solid var(--vault-rule);
+  background: var(--console);
+  color: var(--console-text);
+  border: 1px solid var(--console-rule);
+  font-family: var(--font-mono);
+  clip-path: polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px);
 }
 
-::selection { background: var(--cyan); color: var(--ink); }
+::selection { background: var(--signal); color: var(--on-action); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
